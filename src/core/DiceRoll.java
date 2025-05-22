@@ -51,13 +51,17 @@ public class DiceRoll extends Game {
             if (position <= FIELD_COUNT) {
                 choice = InputHandler.readChoices("Prejete si risknout dalsi pokus?", "Ano", "Ne");
             } else {
+                // Odečtení z balancu
                 System.out.println("Skocil jste mimo pole jste prohral");
+                player.decreaseBalance(winnings);
                 return new GameResult(this, 0, getInputBet(), false);
             }
         }
         if (position <= 4) winnings *= 1.1;
         else if (position <= 6) winnings *= 1.4;
         else winnings *= 2;
+        // Přičtení balancu
+        player.increaseBalance(winnings);
         System.out.println("Vyhráno: " + winnings);
         return new GameResult(this, winnings, getInputBet(), true);
     }

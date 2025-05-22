@@ -29,7 +29,9 @@ public class Roulette extends Game {
                 winnings *= betMultiplyer;
                 choice = InputHandler.readChoices("Prezil jste. Prejete si risknout dalsi pokus?", "Ano", "Ne");
             } else {
+                // Odečítaní Balancu
                 System.out.println("Ruletu jste prohral");
+                player.decreaseBalance(winnings);
                 return new GameResult(this, 0, inputBet, false);
             }
         }
